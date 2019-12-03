@@ -1,0 +1,311 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="keywords" content="卡丘, 卡丘"><meta name="description" content="Let's try!"><title>卡丘</title><link rel="icon" href="/assets/favicon-16x16.png?v=1.5.4" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon-32x32.png?v=1.5.4" type="image/png" sizes="32x32"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.5.4"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontawesome: {"prefix":"fa"},
+  sidebar: {"offsetTop":"30px","renderTocDepth":4},
+  header: {"scrollDownIcon":false},
+  back2top: {"enable":true},
+  reward: false,
+  fancybox: false,
+  zoom_image: {"enable":true,"mask_color":"rgba(0,0,0,0.6)"},
+  gallery_waterfall: undefined,
+  lazyload: undefined,
+  pjax: undefined,
+  external_link: {"icon":{"enable":true,"name":"external-link"}},
+  shortcuts: {"switch_post":false},
+  prompt: {"copy_success":"Copy Success","copy_error":"Copy Error","creative_commons":"Creative Commons","copy_button":"Click to Copy"}
+};
+
+window.CONFIG = CONFIG;</script></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>Home</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>Archives</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>Categories</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>Tags</a></div></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">卡丘</div><div class="header-info-subtitle">PICulture</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content content-home"><section class="post-list"><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2017/05/24/2017-05-24-math-modeling/">数学建模小谈</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2017-05-24</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><h3 id="背景"><span class="heading-link">背景</span></h3><p>本科就听说过数模比赛，一直以为很高大上，再加上与所学不相关，就没放在心上。大四下很空闲的时候报过一次名，结果错过了赛题发布不了了之。</p>
+<p>这次欣然参与是由于师姐和导员的提及，仔细读了试题，了解这到底是一项什么类型的比赛。结果惨淡收场，只建模出了第一题的概要。</p>
+<p>一周的时间下来还是有不少收获和感触的，下面分几点来谈。</p>
+<h3 id="快速学习"><span class="heading-link">快速学习</span></h3><p>回想自己在赛题发布后依次采取的行动</p>
+<ol>
+<li>在知乎上查询参赛案例分享和书籍推荐</li>
+<li>图书馆借阅数模相关书籍</li>
+<li>知网查阅相关论文</li>
+<li>Github、GoogleCode、各种blogs查阅相关代码</li>
+<li>再次到图书馆借阅具体算法资料</li>
+<li>解题建模码代码</li>
+</ol>
+<p>感觉自己的思路还是有调理的，但是时间过于久了。那么快速学习是一种怎样的能力呢？知乎上@<span class="external-link"><a href="https://www.zhihu.com/people/zhu-wu-neng-40" target="_blank" rel="noopener">朱悟能</a><i class="fa fa-external-link"></i></span>有回答</p>
+<blockquote>
+<p>快速学习则需要四步。</p>
+<ol>
+<li>需要学会加快搜集信息速度。</li>
+<li>学会加快分析、归纳、总结等方式将信息转化为自己的知识速度。</li>
+<li>加快实践速度。</li>
+<li>不断熟练1-3过程，厚积薄发</li>
+</ol>
+</blockquote>
+<p>反观自己存在的问题:</p>
+<ul>
+<li>信息搜集滞后，图书馆中推荐书目基本借空</li>
+<li>搜集重点性不强，曾想把《数学模型》一书啃一遍</li>
+<li>实践效率低，看理论时焦虑代码，写代码时焦虑理论</li>
+</ul>
+<p>相应改进</p>
+<ul>
+<li>再次重视起图书馆资源，准备借满，续借一次可以一直借到再开学。</li>
+<li>增加做事的专注度，排除无关信息</li>
+<li>要明确思路和方向</li>
+</ul>
+<h3 id="代码编写"><span class="heading-link">代码编写</span></h3><p>之前写代码基本时论文实现，思路都已在文章中清晰描述，较为容易。这一次则忽视掉了前期的工作，导致后面进展愈慢，增加一个约束条件就要改动不少，码过之后才对问题分析透彻。</p>
+<p>想到有人推荐《代码简洁之道》这本书，可以借阅一下。</p>
+<h3 id="其他感悟"><span class="heading-link">其他感悟</span></h3><p>最后放弃不仅是因为来不及做后两题，还因为前面模型建立自说自话的成分太多，觉得没有意义在往下进行了。说实话接触运筹学这类内容短短几天，了解实为肤浅，没有足够充足的输入怎会有不错的输出呢。</p>
+<p>总的来说，自己觉得这几天还是比较充实的，接触新鲜的知识，每天想着问题睡觉。以后的时间觉得还是要合理规划，多去研究与专业方向相关的内容，把其他学科仅仅作为一种调节消遣的方式就好。还有一点，是要锻炼好身体，每天伏案真心很累。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2017/05/23/2017-05-23-markdown-note/">Markdown语法小记</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2017-05-23</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><p>老郭相声中里有个段子是讲，于老师看书时桌子上会放着两本书，一本是字典，另一本是如何查字典。终于，我准备写一些技术类的博文，那么，首先要做的事情就是学习如何写博文。万幸，用键盘打字这一技能我已经掌握了，接下来准备了解一下 Markdown 这种写作语法。<span class="external-link"><a href="https://news.cnblogs.com/n/139649/" target="_blank" rel="noopener">为什么我们要学习 Markdown 的三个理由</a><i class="fa fa-external-link"></i></span>给出了学习 Markdown 进行写作的三个理由:</p>
+<blockquote>
+<ul>
+<li>排版简洁明了</li>
+<li>不易产生错误</li>
+<li>不用局限于浏览器</li>
+</ul>
+</blockquote>
+<p>看过之后感觉还是比较简洁易懂的，注意以下几点即可：</p>
+<ul>
+<li>英文模式输入</li>
+<li># 和 * 后面要有space</li>
+<li>加入换行避免前后之间的影响</li>
+</ul>
+<p>下面记录一下关于语法规则和在线预览的网址：</p>
+<p><span class="external-link"><a href="http://wowubuntu.com/markdown/" target="_blank" rel="noopener">Markdown语法说明 (简体中文版)</a><i class="fa fa-external-link"></i></span>可能需科学上网</p>
+<p><span class="external-link"><a href="https://www.zybuluo.com/mdeditor?url=https%3A%2F%2Fwww.zybuluo.com%2Fstatic%2Feditor%2Fmd-help.markdown" target="_blank" rel="noopener">cmd markdown 编辑器</a><i class="fa fa-external-link"></i></span></p>
+<p>尝试过的markdown编辑器是<span class="external-link"><a href="https://ivarptr.github.io/yu-writer.site/" target="_blank" rel="noopener">Yu Writer</a><i class="fa fa-external-link"></i></span>，一款国人独立开发的 Markdown 编辑器，用起来还是很顺手的，但感觉启动速度较慢。</p>
+<p>目前使用的编辑器是<span class="external-link"><a href="https://typora.io/" target="_blank" rel="noopener">Typora</a><i class="fa fa-external-link"></i></span> ，极简UI，推荐使用。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2017/05/09/2017-05-09-The-most-popular-decision-class/">读《京东大学最受欢迎的决策课》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2017-05-09</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><p>读过这样一本书，本以为是一本励志鸡汤书，但是读后觉得书中所言还是有道理的。自以为经过这么多年理科思维模式的培养，看问题和做决定已经足够的理性。但是，读完此书觉得自己仍然有一种对于做决策的逃避心理，常用“不管作出什么决定都会后悔的”这种话安慰自己，任由自己随意选择。这样看似是自己所作决定，然而，这其实只是一种变相的掷骰子而已。至于人是否有自己的独立意志，这就不是三言两语可以说清的了。</p>
+<p>引法国哲学家帕斯卡尔的话：</p>
+<blockquote>
+<p>人只不过是一根芦苇，是自然界最脆弱的东西。但是，他是一根能思想的苇草。</p>
+</blockquote>
+<h3 id="导论-为什么需要“学习”"><span class="heading-link">导论  为什么需要“学习”</span></h3><p>“知识，判断，行动”三个要素联动思考</p>
+<p>不当专家，而要当专业人才</p>
+<p>没有所谓的正确答案，要学习自己得出答案的思考方法</p>
+<h3 id="第一课-“讨论”的目的是什么"><span class="heading-link">第一课  “讨论”的目的是什么</span></h3><p>要得出当下的最佳选择而非一个正确答案</p>
+<p>为什么要讨论，因为人的理解能力和思想决断力具有容易扭曲的特点。第一个是重视已经成为习惯的事物，维持现状是最为轻松的。第二个是在有限的信息框架中进行思考，还有锚定效应的问题。第三个问题，体现在投资亏损上，过高的评价了此前投入的成本（付出的时间、精力、金钱）。这就是为什么需要讨论的原因。</p>
+<p>存在着三种伪讨论，一是拿自己作为依据，二是拿大家作为依据，三是无法反驳的言论无法证伪。</p>
+<p>讨论加入特定的规则后形成辩论，如以下规则，一是针对特定的论题进行讨论，二是划定正方和反方，<strong>对于既定的主题，必须  在头脑中整理出正反两个方向的意见，这才是辩论的本质所在</strong>。三是决定发言顺序，发言时间，四是要说服局外人，把对手驳倒或是让对方改变意见的是谈判。</p>
+<p>不能无休无止的讨论，重要的是得到结论。</p>
+<p>辩论中最为重要的是“准备和依据”。</p>
+<p>掌握“知识、判断、行动”再加上“修正”的思考方式。</p>
+<p>如果要当游击队员奋战在最前线，请以“多变的生存方式”为目标。不偏不倚的生活方式，说不定会变成停止思考的生活方式。</p>
+<h3 id="第二课-明确问题，具体思考"><span class="heading-link">第二课  明确问题，具体思考</span></h3><p>论题的选择应该：1选择能够二者择其一的具体问题，2选择有讨论价值的问题，3选择能够明确得到结论的问题。综上，<strong>最好的就是“是否应该采取某种具体行动”这类论题</strong>，在辩论世界中被称为<strong>“政策论题”</strong>。</p>
+<p>如果问题太大且过于笼统，要先细分后在进行思考。</p>
+<p>养成同时对多个论题进行思考的习惯。</p>
+<p>不要浪费时间在无谓的讨论上。</p>
+<h3 id="第三课-随时比较优点和缺点"><span class="heading-link">第三课  随时比较优点和缺点</span></h3><p>优点存在的三个要点：</p>
+<ul>
+<li><p>内因性（存在某个问题）</p>
+</li>
+<li><p>重要性（该问题的严重程度）</p>
+</li>
+<li><p>解决性（通过该行动解决问题）</p>
+</li>
+</ul>
+<p>缺点存在的三个要点：</p>
+<ul>
+<li><p>发生过程（采取论题的行动，会出现的新问题）</p>
+</li>
+<li><p>深刻性（新问题是否严重）</p>
+</li>
+<li><p>固有性（现实中尚未发生这样的问题）</p>
+</li>
+</ul>
+<p>机会成本是指如果不采取行动的话，原本可以实现的事情就再也无法实现。</p>
+<h3 id="第四课-反论是深入思考的必要条件"><span class="heading-link">第四课  反论是深入思考的必要条件</span></h3><p>为优缺点成立的三个条件提出反论</p>
+<h3 id="第五课-何为辩论的正确主张"><span class="heading-link">第五课  何为辩论的正确主张</span></h3><p>正确主张成立的三个条件：</p>
+<p>主张要有依据</p>
+<p>能够提出反论</p>
+<p>依据要经得起反论的推敲</p>
+<p>要对推论质疑。推论大致可分为：<strong>演绎法（如三段式），归纳法，因果关系</strong>。</p>
+<h3 id="第六课-用作武器的信息收集术"><span class="heading-link">第六课  用作武器的信息收集术</span></h3><p>不要盲目相信信息。可以对以下四个谬误提出反论：</p>
+<p>对资料的扩大化解释</p>
+<p>预想情况的偏离</p>
+<p>典故出处的不完善</p>
+<p>没有根据的资料</p>
+<p>利用自己的头脑和行动去获取有价值的信息</p>
+<h3 id="第七课-关于决断"><span class="heading-link">第七课  关于决断</span></h3><p>世上没有所谓的正确答案，不要因为不知道正确答案而无法行动，重要的是<strong>推导出当下的最佳选择之后无论如何先采取行动</strong>。</p>
+<p>一旦发现前提错误，要先改正之后再做出行动，避免思想停滞。</p>
+<p>所谓辩论思考是指先客观后主观的决断方法。用质、量、概率来思考哪一个更为重要，自己的人生由自己思考，自己决定。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2017/03/17/2017-03-17-Be-My-Personal-Best/">读《一只特立独行的猪》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2017-03-17</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><blockquote>
+<p>我已经四十岁了，除了这只猪，还没见过谁敢于如此无视对生活的设置。相反，我倒是见过很多想要设置别人生活的人，还有被设置生活安之若素的人。</p>
+</blockquote>
+<blockquote>
+<p>文字是用来读，用来听，不是用来看的——要看不如去看小人书。</p>
+</blockquote>
+<blockquote>
+<p>我们年轻时都知道，要想读好文字就要读译著，因为最好的作者在搞翻译。</p>
+</blockquote>
+<blockquote>
+<p>有了这样的小说，阅读才不算是过时的陋习——任凭你有宽屏幕、环绕立体声，看电影的感觉终究不能和读这样的小说相比。</p>
+</blockquote>
+<blockquote>
+<p>人生在世，不必什么都知道，只知道最好的就够了。</p>
+</blockquote>
+<blockquote>
+<p>善良是要建立在真实的基础上，所以让我去选择道德的根基，我愿选实事求是。</p>
+</blockquote>
+<blockquote>
+<p>我以为自己的本分就是把小说写的尽量好看，而不应在作品里夹杂某些刻意说教。</p>
+</blockquote>
+<blockquote>
+<p>说良心话是：身体在受罪，思想也更坏了，变得更阴险，更奸诈。</p>
+</blockquote>
+<blockquote>
+<p>人的生活应该无智无性无趣，在我们这里仿佛已经成了人间的至理。</p>
+</blockquote>
+<blockquote>
+<p>这时才想到：也许不是别人怪，是我怪。</p>
+</blockquote>
+<blockquote>
+<p>强者为弱者开辟道路，但是强者往往为弱者所奴役。</p>
+</blockquote>
+<blockquote>
+<p>见到一种差异，就以为这里有优劣之分，这是一种市侩心理。</p>
+</blockquote>
+<blockquote>
+<p>归根到底一句话，毫不利己必然包含虚伪。</p>
+</blockquote>
+<blockquote>
+<p>（只要能活着就是好的）……我对这种想法是断然的不赞成，因为抱有这种想法的人就可能活成任何一种糟糕的样子，从而使生活本身失去意义。</p>
+</blockquote>
+<p>小记：</p>
+<p>  今日中午起床，感冒症状未退。</p>
+<p>  下午随便读读论文，晚上读完了这本书。在高三时第一次读王小波《沉默的大多数》，结果半途而废，相比而言这本书还是比较幽默的。这本书应该属于杂文集，或许是因分辨不得是何种文体，故偷懒以杂字概之。相比于小说，这种篇幅的短文简直是清晰明了，更能轻松地提取出文章的主要内容和中心思想（小学惯例题目）。全书读过，留存在心中的一个观点就是：要过随心的生活而非norm化的，也就是更加倾听自己内心的声音。或许这其实是我自己固有的想法，假借读后感之名而发。这种想法常常隐身于角落，而站在明处的是苦行僧式的、存天理灭人欲式的想法。在自己给自己的约束之中感受生活。</p>
+<p>  无关对错，只要是源于自己内心的选择。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2016/11/06/2016-11-06-Just-the-Three-of-Us/">读《我们仨》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2016-11-06</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-24</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><blockquote>
+<p>一九九七年早春，阿瑗去世。一九九八年岁末，锺书去世。我们三人就此失散了。世间好物不坚牢，彩云易散琉璃脆。现在，只剩下了我一人。 我清醒地看到以前当作我们家的寓所，只是旅途上的客栈而已。家在哪里，我不知道。我还在寻觅归途。</p>
+</blockquote>
+<blockquote>
+<p>人世间不会有小说或童话故事那样的结局：“从此他们永远快快活活地一起过日子。”人间没有单纯的快乐。快乐总夹带着烦恼和忧虑。人间也没有永远。我们一生坎坷，暮年才有一个可以安顿的居处。但老病相催，我们在人生道路上已走到尽头了。</p>
+</blockquote>
+<blockquote>
+<p>锺书说的什么话，我当时没问，以后也没想到问，现在已没人可问。</p>
+</blockquote>
+<blockquote>
+<p>我曾做过一个小梦，怪他一声不响地忽然走了。他现在故意慢慢儿走，让我一程一程送，尽量多聚聚，把一个小梦拉成一个万里长梦。这我愿意。送一程，说一声再见，又能见到一面。离别拉得长，是增加痛苦还是减少痛苦呢？我算不清。但是我陪他走的愈远，愈怕从此不见。</p>
+</blockquote>
+<blockquote>
+<p>三里河寓所，曾是我的家，因为有我们仨。我们仨失散了，家就没有了。剩下我一个，又是老人，就好比日暮穷途的羁旅倦客；顾望徘徊，能不感叹“人生如梦”“如梦幻泡影”？ 但是，尽管这么说，我却觉得我这一生并不空虚；我活的很充实，也很有意思，因为有我们仨。也可说：我们仨都没有虚度此生，因为是我们仨。</p>
+</blockquote>
+<p>Something to say：</p>
+<p>  这本小书分为三个部分，第一部分，我们俩老了，讲述了一次梦境，第二部分  ，我们仨失散了，讲述古驿道上的相聚与相失。第三部分，我一个人思念我们仨，讲述了近百年的人世历程。初读前文时不甚明白，驿道是何处，是实是虚？读过全书之后便体会到了前文所表达的是何种情感。</p>
+<p>  原先曾思考过读小说的意义何在，故事大多由作者杜撰，书中的人物也是作者有心设计好的。然而，当真的在读这样一本纪实的小说时，我感受到的只有无限的悲凉。昔人已故，书中的欢谈笑颜都已化作过眼云烟，在追忆故人时，今人也已为故人。所经世事都逃不过“树犹如此，人何以堪”。</p>
+<p>  钱杨一家三口既是时代名人，又是社会中的小人物、小家庭的缩影。但与他人不同的是，杨绛先生的超脱旷达是常人难以具备的。在我看来得过分伤感，于她来说也是幸福的回忆。这或许就是人生。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2016/11/05/2016-11-05-1984/">读《1984》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2016-11-05</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><blockquote>
+<p>战争即和平 自由即奴役 无知即力量</p>
+</blockquote>
+<blockquote>
+<p>谁控制过去就控制未来；谁控制现在就控制过去。</p>
+</blockquote>
+<blockquote>
+<p>用逻辑来反逻辑，一边表示拥护道德一边又否定道德，一边相信民主是办不到的一边又相信党是民主的捍卫者。</p>
+</blockquote>
+<blockquote>
+<p> 所谓自由就是可以说二加二等于四的自由。承认这一点，其他一切就迎刃而解。</p>
+</blockquote>
+<blockquote>
+<p>他们不到觉悟的时候，就不会造反；他们不造反，就不会觉悟。</p>
+</blockquote>
+<blockquote>
+<p>可以说，在没有理解能力的人身上，党把它的世界观灌输给他们最为成功。最明显不过的违反现实的东西，都可以使他们相信，因为他们从来不理解，对他们的要求是何等荒唐，因为他们对社会大事不发生兴趣，从来不去注意发生了什么事情。正是由于缺乏理解，他们没有发疯。</p>
+</blockquote>
+<blockquote>
+<p>如果你感到保持人性是值得的，即使这不能有任何结果，你也已经打败了他们。</p>
+</blockquote>
+<blockquote>
+<p>战争的基本行为就是毁灭，不一定是毁灭人的生命，而是毁灭人类的劳动产品。</p>
+</blockquote>
+<blockquote>
+<p>我们很明白，没有人会为了废除权力而夺取权力。权力不是手段，权力是目的。建立专政不是为了保卫革命；反过来进行革命是为了建立专政。  </p>
+</blockquote>
+<blockquote>
+<p>和平部负责战争，真理部负责造谣，友爱部负责拷打，富裕部负责挨饿。</p>
+</blockquote>
+<blockquote>
+<p>有真理，就有非真理，如果你坚持真理，哪怕全世界都不同意你，你也没有发疯。</p>
+</blockquote>
+<p>Something to say：</p>
+<p>  这本书可以分类为恐怖小说之列，给人带来的是一种精神上的可怕，无能为力的感觉。更令人感到不安的原因是，在现实生活中与书中的场景竟然有莫名的相似之处（红领巾，新闻联播，中日矛盾etc），究竟何为真实，何为谎言。更讽刺的是，在读1984这本书的过程中，有时是在上党课，有时在上中特课，更能体会到小说带来的强烈真实感。</p>
+<p>  真的是无能为力，不能找出解决的答案，书中的结局让我联想到了《飞出疯人院》，又有谁是真的疯了，又有谁能真的逃脱呢？有时候觉得追逐科学，追逐技术，这些是相对的世间真理，在其中获得满足与成就感，是人生一个不错的选择。但是，如果这些技术只是用来实现电慕的作用，岂不是被赤裸裸的利用了？我眼前好像看到了那道刺眼的白光，在电影《cube》中那最后打开的窗。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2016/10/14/2016-10-14-a-thousand-splendid-suns/">读《灿烂千阳》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2016-10-14</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><blockquote>
+<p>玛丽雅姆签下了她的名字——玛，丽，雅，姆，她知道所有人的眼睛都在看着她的手，玛丽雅姆下一次在一份文件上签下她的名字，将会在二十七年之后，到时候将会在一位毛拉在场。</p>
+</blockquote>
+<blockquote>
+<p>“人们数不清她的屋顶上有多少轮皎洁的明月，也数不清她的墙壁之后那一千个灿烂的太阳”</p>
+</blockquote>
+<blockquote>
+<p>＂约瑟将会重返迦南，请别悲哀；棚屋将会回到玫瑰花园，请别悲哀；如果洪水即将来临，吞没所有的生命；诺亚方舟是你们在风暴中心的指引，请别悲哀。＂     </p>
+</blockquote>
+<blockquote>
+<p>他刚才称赞她的厨艺给她带来的快乐已经烟消云散。取而代之的，是一种不寒而栗的感觉。玛丽雅姆觉得这个男人的意志既强大又不可动摇，就像俯视着古尔德曼村的沙菲德山脉。</p>
+</blockquote>
+<p>Something to say：</p>
+<p>  一个悲剧的故事，让我了解了下近代阿富汗的历史，对穆斯林有了更深层的了解。早些在读《追风筝的人》时有些匆匆而过，同一个作者，在这本书中，还原了一个更加真实的阿富汗人民的生活。</p>
+<p>  在开学时，偶然翻看知乎，看到了一些中东地区的老照片，竟然还有女性穿着泳装拍照，与我心中身披黑纱的形象大不相同。读完这本书我才知道，在上世纪70年代，估计是所谓的苏联入侵阿富汗时期，曾经给当地带来了一定的民主和自由。然而随着苏联匆匆撤兵，解体，阿富汗“圣战”的爆发，让极端的思想再次复燃。</p>
+<p>  书中的女主人公玛丽雅姆是私生子，是被社会所不齿的存在，和妈妈躲在山上生活。然而在娜娜死后，十几岁的她由父亲安排被迫嫁给了四十多岁的鞋匠，拉希德。然而，拉希德思想极端，剥夺了玛丽雅姆的自由，只准留在家中，一旦出门就要身穿布卡，在她几经流产后就屡屡对她施以暴力。女主就在这样生活中默默忍受着，直到多年以后，拉希德又娶了一个女孩，莱拉。莱拉出生在一个相对开明的家庭，然而亲人全部死于战火中，怀了青梅竹马的孩子，迫不得已同意嫁给了拉希德。两个女人从最初的互相冷漠，到最后互相理解扶持，最后由玛丽雅姆，帮助莱拉逃离了这种压抑的生活。</p>
+<p>  在战争时期，一个人往往是不能左右自己的命运的。在战争的背景下，弱势群体又能有什么尊严权利可言呢。尤其是意识到，这些悲惨的人生并不是那么遥远，就在我们改革开放的同时，或者，就在现在，那些饱受战火的地区，悲剧仍在上演。那里的妇女过于的卑微，饱受歧视和虐待，却无人问津，如果不是读到这样的一本书，我是很难想象世界上还存在奴役女性到这种地步的角落。</p>
+<p>  最后谈一谈伊斯兰教，最开始接触穆斯林一词是来自《穆斯林的葬礼》这一书名，直到最近几年间，一些极端组织的行为使其声名恶化。从书中我也感觉到，每个人心中的真主是不同的，有人心中是惩恶扬善，有人心中是绝对顺从。人们依照各自的理解，遵循着《古兰经》的教义，或温和或极端，这也是文字在聚类过程中，语言产生伊始就具有的歧义性。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2016/10/01/2016-10-01-orphan-trains/">读《孤儿列车》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2016-10-01</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><blockquote>
+<p>你会带着什么上路，又会将什么抛到了身后。</p>
+</blockquote>
+<blockquote>
+<p>我懂的事太多，见过人们最卑劣、最绝望、最自私的一面，而这一切让我变得小心翼翼。于是我学着伪装，学着微笑与点头，学着在毫无触动时佯装感同身受。我学习装模作样，装作与众人一般无二，即便心中早已支离破碎。</p>
+</blockquote>
+<blockquote>
+<p>我相信世上确有鬼魂，那些昔日抛下我们的故人，今日流连不去的幽灵。我这一生常觉得他们就在身旁，或观望或见证，世间众生却毫不知情，毫不在意。</p>
+</blockquote>
+<blockquote>
+<p>在金瓦拉，我们一家人穷困潦倒，时好时坏，但身边至少还有家人，又相熟的故交。我们有着共同的传统与世界观。直到离开故土，我们才明白当初对这一切是多么习以为常、熟视无睹。</p>
+</blockquote>
+<blockquote>
+<p>我心下明了：不管我说什么，都无法改变她对我的看法。但是说也奇怪，悟到这点之后，我竟然感觉颇有几分解脱。</p>
+</blockquote>
+<blockquote>
+<p>他们眼巴巴的望着我，一时间我茫然无措。我对尼尔森夫妇的感情——感激也好、尊重也好、欣赏也好，却跟亲子之爱并不相同，应该说是不尽相同。</p>
+</blockquote>
+<blockquote>
+<p>真怪呀。我想，我到了父母从未到过也永远不会亲眼见到的地方。真怪呀，我在这儿，他们却已经不在了。</p>
+</blockquote>
+<p>Something to say：</p>
+<p>  最开始拿到书，还以为这本书的书名只是一个比喻，没想到读下来发现，这是一本纪实的小说，孤儿列车确有其事。如同在美洲新大陆的人口贩卖，大城市将一些移民失败者的子女抛弃，作为劳动力，送往了偏远的中西部。</p>
+<p>  断断续续的都下来有三个星期了，故事的前一部分过于凄惨（事实上就是如此），有些读不下去，到结局部分又过于明朗，久别的重逢，温暖的结局，得到了上帝的福佑似的。其实，很容易想到，更多的孤儿，这一生，是被上帝所遗弃的。</p>
+<p>  这本书中，字字皆是孤独。妮芙就算是和亲生父母在一起生活下去，也未必是幸福的。美利坚建国之时的宣传“人生而平等”，在我看这是一个彻头彻尾的谎言，改成“人生而孤独”都会看着恰当一些。更何况，妮芙先是被看作免费的劳动力，再后来遭到养父的施暴，以至于遇到以礼相待的尼尔森夫妇，她都感觉受宠若惊。最后过上那种规矩而又拘礼的生活，这可以说是既幸运又不幸。再次遇上德国仔是一次转折，遇上了一个能真正心灵相通的人，却没想到这次是命运的玩笑，以至于让她不敢将情感托付给任何人——即便是她的女儿。</p>
+<p>  虽然年纪尚轻，我却也常常感觉到生命的虚无，存在的虚无。今天重温五月天《干杯》的MV时，又添愁肠，感觉这一生恍如云烟。也许正是有所经历才会与主人公有所共鸣，年岁不至，才不能理解她最后的释然。还有一点恰巧的是，我们有一个相同的习惯，习惯将旧物收藏，我们用这种方式，将一段情感收藏，一段时光收藏，一段记忆收藏。用这种方式，聊以慰藉人生。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2016/09/11/2016-09-11-Grocery-store/">读《解忧杂货店》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2016-09-11</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><blockquote>
+<p>不管是骚扰还是恶作剧，写这些信给浪矢杂货店的人，和普通咨询者在本质上是一样。他们都是内心破了个洞，重要的东西正从那个洞流失。人的心声是绝对不能无视的。</p>
+</blockquote>
+<blockquote>
+<p>如果自己不想积极认真地生活，不管得到什么答案都没用。</p>
+</blockquote>
+<blockquote>
+<p>有时伤害，有时相助，人们总在不经意的时候与他人的人生紧密相连。</p>
+</blockquote>
+<blockquote>
+<p>很多时候，咨询的人心里已经有了答案，来咨询只是想确认自己的决定是对的。</p>
+</blockquote>
+<blockquote>
+<p>如果说，来找我咨询烦恼的人是迷途的羔羊，通常他们手上都有地图，却没有看地图，或是不知道自己目前的位置。 但我相信你不属于任何一种情况，你画的地图是一张白纸，所以，即使想决定目的地，也不知道路在哪里。 地图是白纸当然很伤脑筋，任何人都会布置所措。 但是不妨换一个角度思考，正因为是白纸，所以可以画任何地图，一切都掌握在你自己手上。你很自由，充满了无限可能。这是很棒的事，我衷心祈祷你可以相信自己，无悔地燃烧自己的人生。</p>
+</blockquote>
+<blockquote>
+<p>其实很久以前我就知道自己应该怎样选择，只是一直无法下决心舍弃梦想。到现在，我依然不知道怎样才能做到这一点。打个比方，这就如同单相思的感觉，明知恋情不会有结果，却还是忘不了对方。</p>
+</blockquote>
+<p>Something to say：</p>
+<p>  解忧杂货店这本书早有耳闻，在当当上也是畅销书，碰巧在纸飞机上看到有卖，便心动买来读一读。很幸运，之前丝毫没有被剧透过，书的前页也没有类似于大纲那样的序言，所以到翻开书的那一刻，我所知道的也仅仅是作者东野圭吾是一名推理小说家这一信息。就是这样，刚刚读了没多少页，便被书中的设定深深吸引住，一封封穿越时空的书信。</p>
+<p>  虽然每个章节讲述的都是不同的故事，但是，每个故事之中却都有着缕缕的连续。每个故事之中又存在着这样那样的困惑，让我难以做出合适的抉择。这些困惑总是存在于亲人朋友之间的关系之中，矛盾双方都难以割舍。每当我看到这些纠结的困惑时，总是想知道作者回给出怎样的解答。</p>
+<p>  我们就像迷途的羔羊，在每一个路口上纠结着对错，可是生活中又哪有什么真正的正确错误可言呢？生活中既有个人的自由和追求梦想，又有人与人之间的善意的羁绊。看过火影之后对羁绊会有了更深的理解，这样一种美丽的负担。</p>
+<p>  最后，既然是一碗鸡汤，就不要再考虑逻辑真实性了，相信人心中的善良，认真对待生活的每一分每一秒。</p>
+</div></div></article><article class="post"><header class="post-header"><h1 class="post-header-title"><a class="post-header-title__a" href="/2016/06/03/2016-06-03-Paris's-claw/">读《巴黎的鳞爪》</a></h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2016-06-03</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-23</span></span></div></header><div class="post-body"><div class="post-body-excerpt"><p>也不知属于何种文体，游记或是散文，权当在电脑跑程序时填充一下空闲的时间。</p>
+<h3 id="《给陆小曼—代序》"><span class="heading-link">《给陆小曼—代序》</span></h3><p>虽然亦为才女，但是感觉从名字上就输给了林徽因。现在人们熟知的更多的是徐志摩对林徽因的情缘，以至于林为长子所写的《你是人间的四月天》被讹传，还被引用为电视剧的名称讲述徐与林陆张三人的感情纠葛。</p>
+<p>我是不喜欢林徽因的，原因很简单，受到了高中语文老师的影响。记得他当时讲，林是一个比较现实的人，从最终选择梁思成也可以看出，在我心中那种浪漫气息就这样的打破了。两人缘起英伦，却有缘无分，在1924年泰戈尔访华期间，徐志摩和林徽因共同担任翻译，之后徐志摩陪同泰戈尔去了日本，林徽因和梁思成到了宾夕法尼亚大学，当徐志摩与林徽因再次见面的时候，已是四年之后。1931年准备参加林徽因演讲会的徐志摩遭遇坠机事故遇难，不免令人唏嘘。</p>
+<p>再来看徐写的序篇，与陆所讲的亲昵之言，在我感觉来是有些不能理解的。</p>
+<h3 id="《巴黎的鳞爪》"><span class="heading-link">《巴黎的鳞爪》</span></h3><blockquote>
+<p>放宽一点说，人生只是个机缘巧合，别瞧日常生活河水似的流得平顺，它那里面多得是潜流，多的是漩涡。</p>
+</blockquote>
+<blockquote>
+<p>巴黎也不定比别的地方怎样不同：不同就在那边生活流波里的潜流更猛，漩涡更急，因此你叫给卷进去的机会也就更多。</p>
+</blockquote>
+<p>萍水相逢的女人，被世事冷落的惆怅的多情的朋友；</p>
+<p>独特癖好的朋友，描摹欣赏真正的别致的美的女人。</p>
+</div></div></article></section><nav class="paginator"><div class="paginator-inner"><a class="extend prev" rel="prev" href="/"><i class="fa fa-chevron-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span></div></nav></div></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><section class="sidebar-toc hide"></section><!-- ov = overview --><section class="sidebar-ov"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/favicon.png" alt="avatar"></div><p class="sidebar-ov-author__p">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state__a posts" href="/archives/"><div class="sidebar-ov-state__a--count">20</div><div class="sidebar-ov-state__a--name">Archives</div></a><a class="sidebar-ov-state__a categories" href="/categories/"><div class="sidebar-ov-state__a--count">19</div><div class="sidebar-ov-state__a--name">Categories</div></a><a class="sidebar-ov-state__a tags" href="/tags/"><div class="sidebar-ov-state__a--count">21</div><div class="sidebar-ov-state__a--name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a></div></section></div></aside><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>&copy; 2019</span><span class="fa fa-heart footer-icon"></span><span>卡丘.</span></div><div><span>Powered by <a href="http://hexo.io/" title="hexo" target="_blank" rel="noopener">hexo</a></span><span> v4.0.0.</span><span class="separator">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="stun" target="_blank" rel="noopener">stun</a></span><span> v1.5.4.</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="progress"></div></div><div class="back2top" id="back2top"><i class="back2top-icon fa fa-rocket"></i></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=1.5.4"></script><script src="/js/stun-boot.js?v=1.5.4"></script><script src="/js/scroll.js?v=1.5.4"></script><script src="/js/header.js?v=1.5.4"></script><script src="/js/sidebar.js?v=1.5.4"></script></body></html>

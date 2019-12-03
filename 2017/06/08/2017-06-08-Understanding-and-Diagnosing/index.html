@@ -1,0 +1,95 @@
+<!DOCTYPE html><html lang="zh-Hans"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="format-detection" content="telephone=no"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black"><meta name="keywords" content="卡丘, 卡丘"><meta name="description" content="Let's try!"><title>《Understanding and Diagnosing Visual Tracking Systems》笔记 | 卡丘</title><link rel="icon" href="/assets/favicon-16x16.png?v=1.5.4" type="image/png" sizes="16x16"><link rel="icon" href="/assets/favicon-32x32.png?v=1.5.4" type="image/png" sizes="32x32"><link rel="dns-prefetch" href="https://cdn.jsdelivr.net"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" type="text/css"><link rel="stylesheet" href="/css/index.css?v=1.5.4"><script>var Stun = window.Stun || {};
+var CONFIG = {
+  root: '/',
+  algolia: undefined,
+  fontawesome: {"prefix":"fa"},
+  sidebar: {"offsetTop":"30px","renderTocDepth":4},
+  header: {"scrollDownIcon":false},
+  back2top: {"enable":true},
+  reward: false,
+  fancybox: false,
+  zoom_image: {"enable":true,"mask_color":"rgba(0,0,0,0.6)"},
+  gallery_waterfall: undefined,
+  lazyload: undefined,
+  pjax: undefined,
+  external_link: {"icon":{"enable":true,"name":"external-link"}},
+  shortcuts: {"switch_post":false},
+  prompt: {"copy_success":"Copy Success","copy_error":"Copy Error","creative_commons":"Creative Commons","copy_button":"Click to Copy"}
+};
+
+window.CONFIG = CONFIG;</script></head><body><div class="container" id="container"><header class="header" id="header"><div class="header-inner"><nav class="header-nav"><div class="header-nav-inner"><div class="header-nav-btn fa fa-bars"></div><div class="header-nav-menu"><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/"><i class="fa fa-home"></i>Home</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/archives/"><i class="fa fa-folder-open"></i>Archives</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/categories/"><i class="fa fa-th"></i>Categories</a></div><div class="header-nav-menu-item"><a class="header-nav-menu-item__a" href="/tags/"><i class="fa fa-tags"></i>Tags</a></div></div></div></nav><div class="header-info"><div class="header-info-inner"><div class="header-info-title">卡丘</div><div class="header-info-subtitle">PICulture</div></div></div></div></header><main class="main" id="main"><div class="main-inner"><div class="content-wrap" id="content-wrap"><div class="content"><div class="post"><header class="post-header"><h1 class="post-header-title">《Understanding and Diagnosing Visual Tracking Systems》笔记</h1><div class="post-header-meta"><span class="post-header-meta-create"><i class="fa fa-calendar-o"></i><span>Posted </span><span>2017-06-08</span></span><span class="post-header-meta-update"><i class="fa fa-calendar-check-o"></i><span>updated </span><span>2018-01-24</span></span></div></header><div class="post-body"><p>《Understanding and Diagnosing Visual Tracking Systems》<br>ICCV2015’ Naiyan Wang, Jianping Shi, Dit-Yan Yeung and Jiaya Jia.<br>论文和matlab代码在<span class="external-link"><a href="http://winsty.net/tracker_diagnose.html" target="_blank" rel="noopener">项目主页</a><i class="fa fa-external-link"></i></span></p>
+<p>读过这篇文章对于跟踪器的框架由模糊变得清晰，明确了一种跟踪器的每个部分，并通过实验观察每个组成部分的重要性，指出今后可以继续研究的方向。</p>
+<h3 id="引言"><span class="heading-link">引言</span></h3><p>本文重点研究了最一般类型的视觉跟踪问题，即short-term single-object model-free tracking。目前的追踪器评估系统主要有Online tracking benchmark (OTB)，the Visual object tracking challenge (VOT)等。然而，由于跟踪器是往往由复杂的结构组成，不能简单的断定其强项与弱项。于是，作者提出了一种框架，将一个追踪系统分成了五个部分，分别为：motion model，feature extractor，observation model，model updater和ensemble post-processor。框架如下图</p>
+<p><img src="http://p31vl29qj.bkt.clouddn.com/201801241603_252.png" alt></p>
+<p>本文发现feature extractor的效果最重要的影响因素，而非被人们研究的最多的observation model，而且，ensemble post-processor是有一个简单的却能有效提升性能的方法，相比之下很少被人研究。除此之外，motion model和model updater的细节也是影响性能的关键。</p>
+<h3 id="相关工作"><span class="heading-link">相关工作</span></h3><p>short-term single-object model-free tracking可以分为两类：生成式和判别式。评价方法有OTB-50中提出的：(AUC) 通过重合率曲线下的的面积或者是中心像素距离曲线来进行评估。还有VOT中使用的两个独立指标：准确度和鲁棒性。其中，准确性是通过预测的位置区域与真实位置区域之间的重合率来度量，鲁棒性是通过跟踪失败的频率来判断的。</p>
+<h3 id="提出的框架"><span class="heading-link">提出的框架</span></h3><ol>
+<li>Motion Model：基于对过去帧的估计，运动模型在当前帧中产生一系列的可能会包含目标的候选区域</li>
+<li>Feature Extractor ：对每个候选区域提取特征，用这些特征来表征这些候选区域</li>
+<li>Observation Model：对候选区域的的特征进行分析，来确定该区域是否为目标区域</li>
+<li>Model Updater：用来更新Observation Model，控制更新的策略以及何时更新</li>
+<li>Ensemble Poste-processor: 当一个跟踪系统中含有多个跟踪器时，要对多个跟踪器的跟踪结果进行一个组合分析，得到最终的跟踪结果</li>
+</ol>
+<p>一个追踪系统的通常工作方式如下：</p>
+<ul>
+<li>首先，在第一帧，用给定的目标区域（一般是由用户框出来的或者事先指定好目标区域坐标）初始化observation model；</li>
+<li>然后在接下来的每一帧中，motion model根据对前面帧的估计，先产生候选区域框；</li>
+<li>然后observation model计算出每个候选区域框是目标物体的概率，计算得到的最高概率的候选区域框将被选择为当前帧的估计结果（即目标所在的区域）；</li>
+<li>基于observation model的输出，model updater决定observation model是否需要更新，如果需要，更新频率是什么；</li>
+<li>最后，如果一个追踪系统中如果有好几个追踪器，ensemble post-processor会将各个追踪器产生的预测结果综合/融合成一个更加精确地预测作为结果输出来。</li>
+</ul>
+<h3 id="验证设置"><span class="heading-link">验证设置</span></h3><h4 id="设置"><span class="heading-link">设置</span></h4><p>使用OTB1.0进行实验，采用两个度量标准，一个是AUC重合率曲线，另一个是位置误差曲线。</p>
+<h4 id="基础模型"><span class="heading-link">基础模型</span></h4><p>作者设计了一个基础的追踪系统。该系统采用particle filter框架作为motion model，将灰度图像的像素作为特征，将logistic regression作为observation model。对于model updater，作者采用一个简单的规则：候选区域框中的最高得分如果在阈值之下，那么该模型将会更新。该基础的追踪系统只有一个追踪器，因此不包含ensemble post-processor部分。该模型的效果如下（下图黑色曲线）：</p>
+<p><img src="http://p31vl29qj.bkt.clouddn.com/201801241604_234.png" alt></p>
+<h3 id="验证和分析"><span class="heading-link">验证和分析</span></h3><h4 id="Feature-Extractor"><span class="heading-link">Feature Extractor</span></h4><p>作者采用了如下5种特征进行实验：</p>
+<ol>
+<li>Raw Grayscale（未处理的灰度图）：简单地将图像重新调整到固定大小，然后将其转换为灰度图，然后使用像素值作为特征</li>
+<li>Raw Color（未处理的彩色图）：图像采用CIE Lab颜色空间作为特征</li>
+<li>Haar-like Features（类Haar特征）</li>
+<li>HOG</li>
+<li>HOG + Raw Color</li>
+</ol>
+<p>结论：HOG + Raw Color特征表现最好。在一个跟踪器中特征是最重要的，特征好才是王道。</p>
+<h4 id="Observation-Model"><span class="heading-link">Observation Model</span></h4><p>采用了如下4个模型进行对比实验：</p>
+<ol>
+<li>Logistic Regression</li>
+<li>Ridge Regression</li>
+<li>SVM</li>
+<li>Structured Output SVM (SO-SVM)</li>
+</ol>
+<p>结论：在弱特征的情况下，分类器的好坏对结果影响很大，但是在强特征的情况下，分类器对最后的结果影响不大，甚至简单的分类器效果会更好。这个性质在DCF和KCF性能比较中也有所体现。</p>
+<h4 id="Motion-Model"><span class="heading-link">Motion Model</span></h4><p>采用了如下3个模型进行实验：</p>
+<ol>
+<li>Particle Filter（粒子滤波）</li>
+<li>Sliding Window</li>
+<li>Radius Sliding Window</li>
+</ol>
+<p>结论：运动模型对跟踪性能的影响较小，然而，设置合适的参数也很重要。使用重设大小输入的粒子滤波对于尺度变化和快速运动的适应性较好。</p>
+<h4 id="Model-Updater"><span class="heading-link">Model Updater</span></h4><p>作者采用了如下两种模型：</p>
+<ol>
+<li>只要当目标的置信度低于阈值时，就更新模型。这样做的目的是确保目标总是有高的置信度。这个也是作者实验的默认的更新模型。</li>
+<li>当目标的置信度与背景置信度的差值低于阈值时，更新模型。这种技巧简单的维持了正样本与负样本之前较大的差距，而不是使目标有一个比较高的置信度。这个方法对遮挡或者目标消失的情况比较有帮助。</li>
+</ol>
+<p>结论：尽管模型的更新经常被视为工程上的技巧（treated as engineering tricks），但是对结果的影响仍然是很重要的，需要更加深入的研究。</p>
+<h4 id="ensemble-post-processor"><span class="heading-link">ensemble post-processor</span></h4><ol>
+<li>来自论文“A superior tracking approach: Building a strong tracker through fusion.”<span class="external-link"><a href="https://www.dfki.de/web/forschung/publikationen/renameFileForDownload?filename=TrackerFusion_ECCV14.pdf&file_id=uploads_2655" target="_blank" rel="noopener">下载地址</a><i class="fa fa-external-link"></i></span>的方法。</li>
+<li>来自论文“Ensemble-based tracking: Aggregating crowdsourced structured time series data.”<span class="external-link"><a href="http://winsty.net/papers/ebt.pdf" target="_blank" rel="noopener">下载地址</a><i class="fa fa-external-link"></i></span>的方法。</li>
+</ol>
+<p>结论：当跟踪器多样性很高时，综合后处理可以跟踪系统的效果。</p>
+<h3 id="当前框架的局限"><span class="heading-link">当前框架的局限</span></h3><ol>
+<li>在某些方法中，几个模块被仅仅耦合在一起。</li>
+<li>没有详细考虑速度因素。</li>
+</ol>
+<h3 id="总结和展望"><span class="heading-link">总结和展望</span></h3><ol>
+<li>_特征最重要</li>
+<li>如果特征足够好，观察模型就不再重要</li>
+<li>模型更新可以显著影响结果</li>
+<li>综合后处理很有效</li>
+<li>运动模型和模型更新的细节很重要</li>
+</ol>
+<p>启发：如何寻找轻量且有效的特征表现，principled的模型更新策略，以及更先进的组合方式</p>
+<h3 id="参考资料"><span class="heading-link">参考资料</span></h3><ol>
+<li><span class="external-link"><a href="http://blog.csdn.net/hjl240/article/details/52225988" target="_blank" rel="noopener">追踪系统分模块解析</a><i class="fa fa-external-link"></i></span></li>
+<li><span class="external-link"><a href="http://blog.csdn.net/u010515206/article/details/53406721" target="_blank" rel="noopener">论文笔记</a><i class="fa fa-external-link"></i></span></li>
+</ol>
+</div><footer class="post-footer"><div class="post-end"><span>------ </span><span>End of text, thank you for reading</span><span> ------</span></div><div class="post-copyright"><div class="post-copyright-author"><span class="post-copyright-author-name">Author: </span><span class="post-copyright-author-value"><a href="https://piculture.github.io">卡丘</a></span></div><div class="post-copyright-link"><span class="post-copyright-link-name">Link: </span><span class="post-copyright-link-value"><a href="https://piculture.github.io/2017/06/08/2017-06-08-Understanding-and-Diagnosing/">https://piculture.github.io/2017/06/08/2017-06-08-Understanding-and-Diagnosing/</a></span></div><div class="post-copyright-notice"><span class="post-copyright-notice-name">Copyright: </span><span class="post-copyright-notice-value">All articles in this blog are licensed under <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" rel="external nofollow" target="_blank">BY-NC-SA</a> unless stating additionally</span></div></div><div class="post-tags"><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="https://piculture.github.io/tags/%E8%AE%BA%E6%96%87/">论文</a></span><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="https://piculture.github.io/tags/%E8%B7%9F%E8%B8%AA/">跟踪</a></span><span class="post-tags-item"><i class="post-tags-item__i fa fa-tags"></i><a class="post-tags-item__a" href="https://piculture.github.io/tags/%E8%AF%84%E4%BB%B7/">评价</a></span></div><nav class="paginator"><div class="paginator-post"><div class="paginator-post-prev"><a class="paginator-post-prev__a" href="/2017/06/10/2017-06-10-long-term-correlation-tracking/"><i class="fa fa-chevron-left"></i><span>《Long-Term Correlation Tracking》笔记</span></a></div><div class="paginator-post-next"><a class="paginator-post-next__a" href="/2017/05/27/2017-05-27-clean-code/"><span>读书笔记《代码整洁之道——程序员的职业素养》</span><i class="fa fa-chevron-right"></i></a></div></div></nav></footer></div></div></div><aside class="sidebar" id="sidebar"><div class="sidebar-inner"><div class="sidebar-nav"><span class="sidebar-nav-toc current">Catalog</span><span class="sidebar-nav-ov">Overview</span></div><section class="sidebar-toc"><div><ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#引言"><span class="toc-number">1.</span> <span class="toc-text">引言</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#相关工作"><span class="toc-number">2.</span> <span class="toc-text">相关工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#提出的框架"><span class="toc-number">3.</span> <span class="toc-text">提出的框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证设置"><span class="toc-number">4.</span> <span class="toc-text">验证设置</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#设置"><span class="toc-number">4.1.</span> <span class="toc-text">设置</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#基础模型"><span class="toc-number">4.2.</span> <span class="toc-text">基础模型</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#验证和分析"><span class="toc-number">5.</span> <span class="toc-text">验证和分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#Feature-Extractor"><span class="toc-number">5.1.</span> <span class="toc-text">Feature Extractor</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Observation-Model"><span class="toc-number">5.2.</span> <span class="toc-text">Observation Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Motion-Model"><span class="toc-number">5.3.</span> <span class="toc-text">Motion Model</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#Model-Updater"><span class="toc-number">5.4.</span> <span class="toc-text">Model Updater</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ensemble-post-processor"><span class="toc-number">5.5.</span> <span class="toc-text">ensemble post-processor</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#当前框架的局限"><span class="toc-number">6.</span> <span class="toc-text">当前框架的局限</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#总结和展望"><span class="toc-number">7.</span> <span class="toc-text">总结和展望</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#参考资料"><span class="toc-number">8.</span> <span class="toc-text">参考资料</span></a></li></ol></div></section><!-- ov = overview --><section class="sidebar-ov hide"><div class="sidebar-ov-author"><div class="sidebar-ov-author__avatar"><img class="sidebar-ov-author__avatar_img" src="/assets/favicon.png" alt="avatar"></div><p class="sidebar-ov-author__p">hello world</p></div><div class="sidebar-ov-state"><a class="sidebar-ov-state__a posts" href="/archives/"><div class="sidebar-ov-state__a--count">20</div><div class="sidebar-ov-state__a--name">Archives</div></a><a class="sidebar-ov-state__a categories" href="/categories/"><div class="sidebar-ov-state__a--count">19</div><div class="sidebar-ov-state__a--name">Categories</div></a><a class="sidebar-ov-state__a tags" href="/tags/"><div class="sidebar-ov-state__a--count">21</div><div class="sidebar-ov-state__a--name">Tags</div></a></div><div class="sidebar-ov-cc"><a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.en" target="_blank" rel="noopener" data-popover="Creative Commons" data-popover-pos="up"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a></div></section><div class="sidebar-reading"><div class="sidebar-reading-info"><span>You have read </span><span class="sidebar-reading-info-num">0</span></div><div class="sidebar-reading-line"></div></div></div></aside><div class="clearfix"></div></div></main><footer class="footer" id="footer"><div class="footer-inner"><div><span>&copy; 2019</span><span class="fa fa-heart footer-icon"></span><span>卡丘.</span></div><div><span>Powered by <a href="http://hexo.io/" title="hexo" target="_blank" rel="noopener">hexo</a></span><span> v4.0.0.</span><span class="separator">|</span><span>Theme - <a href="https://github.com/liuyib/hexo-theme-stun/" title="stun" target="_blank" rel="noopener">stun</a></span><span> v1.5.4.</span></div></div></footer><div class="loading-bar" id="loading-bar"><div class="progress"></div></div><div class="back2top" id="back2top"><i class="back2top-icon fa fa-rocket"></i></div></div><script src="https://cdn.jsdelivr.net/npm/jquery@v3.4.1/dist/jquery.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.min.js"></script><script src="https://cdn.jsdelivr.net/npm/velocity-animate@1.5.2/velocity.ui.min.js"></script><script src="/js/utils.js?v=1.5.4"></script><script src="/js/stun-boot.js?v=1.5.4"></script><script src="/js/scroll.js?v=1.5.4"></script><script src="/js/header.js?v=1.5.4"></script><script src="/js/sidebar.js?v=1.5.4"></script></body></html>
